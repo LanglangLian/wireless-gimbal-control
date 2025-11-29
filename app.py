@@ -3,14 +3,22 @@ import socket
 
 app = Flask(__name__)
 
-# 显示网页
+GIMBAL_IP = "192.168.144.108"      # 云台 IP
+GIMBAL_PORT = 2338                 # 云台 UDP 控制端口
+LOCAL_PORT = 2337                  # 发送端口（
+
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind(("", LOCAL_PORT))  # 绑定源端口
+
+
+def send_to_gimbal(cmd: str):
+    print(f"[DEBUG] 发送控制命令到云台: {cmd}")
+    sock.sendto(cmd.encode(), (GIMBAL_IP, GIMBAL_PORT))
+
 @app.route("/")
 def index():
     return send_from_directory(".", "index.html")
-
-def send_to_gimbal(cmd):
-    print("[DEBUG] 控制命令:", cmd)
-
 
 @app.route("/left")
 def left():
@@ -32,5 +40,8 @@ def down():
     send_to_gimbal("DOWN")
     return "ok"
 
+
 if __name__ == "__main__":
+    print("Web 控制服务已启动：http://127.0.0.1:8000")
     app.run(host="0.0.0.0", port=8000)
+
