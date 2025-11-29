@@ -1,57 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Wireless Gimbal Control</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="utf-8" />
+    <title>Gimbal Controller</title>
 </head>
 <body>
 
-<div class="layout">
-    <!-- 左侧：视频区域 -->
-    <div class="panel video-panel">
-        <h2>Video Preview (RTSP)</h2>
-        <!-- 这里将来放 HLS/RTSP 播放器 -->
-        <div class="video-placeholder">
-            RTSP preview placeholder<br>
-            （以后可接 MediaMTX HLS / WebRTC）
-        </div>
-    </div>
+<h2>云台控制</h2>
 
-    <!-- 右侧：控制和日志 -->
-    <div class="panel control-panel">
-        <h2>Gimbal Control</h2>
+<button onclick="fetch('/up')">⬆ UP</button><br><br>
+<button onclick="fetch('/left')">⬅ LEFT</button>
+<button onclick="fetch('/right')">➡ RIGHT</button><br><br>
+<button onclick="fetch('/down')">⬇ DOWN</button>
 
-        <div class="controls-grid">
-            <div></div>
-            <button data-action="move" data-direction="UP">↑</button>
-            <div></div>
-
-            <button data-action="move" data-direction="LEFT">←</button>
-            <div></div>
-            <button data-action="move" data-direction="RIGHT">→</button>
-
-            <div></div>
-            <button data-action="move" data-direction="DOWN">↓</button>
-            <div></div>
-        </div>
-
-        <div class="zoom-controls">
-            <button data-action="zoom" data-direction="IN">Zoom In</button>
-            <button data-action="zoom" data-direction="OUT">Zoom Out</button>
-        </div>
-
-        <div class="hint">
-            键盘快捷键：W↑ S↓ A← D→ ，Q = Zoom In，E = Zoom Out
-        </div>
-
-        <h3>Log</h3>
-        <div id="log" class="log-box"></div>
-    </div>
-</div>
-
-<script src="/static/script.js"></script>
 </body>
 </html>
-
-
